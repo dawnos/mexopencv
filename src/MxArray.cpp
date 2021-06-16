@@ -5,6 +5,8 @@
  */
 #include "MxArray.hpp"
 
+#include "opencv2/core/core_c.h"
+
 namespace {
 
 /// Field names for cv::Moments.
@@ -551,7 +553,7 @@ cv::Mat MxArray::toMat(int depth, bool transpose) const
     std::vector<int> d(dims(), dims()+ndims());
     const mwSize ndims = (d.size()>2) ? d.size()-1 : d.size();
     const mwSize nchannels = (d.size()>2) ? d.back() : 1;
-    depth = (depth == CV_USRTYPE1) ? DepthOf[classID()] : depth;
+    depth = (depth == -1/* CV_USRTYPE1 */) ? DepthOf[classID()] : depth;
     std::swap(d[0], d[1]);
     cv::Mat mat(ndims, &d[0], CV_MAKETYPE(depth, nchannels));
     // Copy each channel from mxArray to Mat (converting to specified depth),
@@ -629,7 +631,7 @@ cv::MatND MxArray::toMatND(int depth, bool) const
     // Create output cv::MatND object of the specified depth, and of same size
     // as mxArray. This is a single-channel multi-dimensional array.
     std::vector<int> d(dims(), dims() + ndims());
-    depth = (depth == CV_USRTYPE1) ? DepthOf[classID()] : depth;
+    depth = (depth == -1 /*CV_USRTYPE1 */) ? DepthOf[classID()] : depth;
     cv::MatND mat(d.size(), &d[0], CV_MAKETYPE(depth, 1));
 
     // Copy data from mxArray to cv::MatND (converting to specified depth)
@@ -656,7 +658,7 @@ cv::SparseMat MxArray::toSparseMat(int depth) const
             "MxArray is not real 2D double sparse");
 
     // create cv::SparseMat of same size and requested depth
-    depth = (depth == CV_USRTYPE1) ? DepthOf[classID()] : depth;
+    depth = (depth == -1 /* CV_USRTYPE1 */) ? DepthOf[classID()] : depth;
     const mwSize m = rows(), n = cols();
     const int dims[] = {static_cast<int>(m), static_cast<int>(n)};
     cv::SparseMat mat(2, dims, depth);

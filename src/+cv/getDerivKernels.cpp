@@ -10,11 +10,11 @@
 using namespace std;
 using namespace cv;
 
-namespace {
-/// KSize map for option processing
-const ConstMap<string,int> KSizeMap = ConstMap<string,int>
-    ("Scharr", CV_SCHARR);
-}
+// namespace {
+// /// KSize map for option processing
+// const ConstMap<string,int> KSizeMap = ConstMap<string,int>
+//     ("Scharr", CV_SCHARR);
+// }
 
 /**
  * Main entry called from Matlab
@@ -44,8 +44,9 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
         else if (key == "Dy")
             dy = rhs[i+1].toInt();
         else if (key == "KSize")
-            ksize = (rhs[i+1].isChar()) ?
-                KSizeMap[rhs[i+1].toString()] : rhs[i+1].toInt();
+            // ksize = (rhs[i+1].isChar()) ?
+                // KSizeMap[rhs[i+1].toString()] : rhs[i+1].toInt();
+            ksize = rhs[i+1].toInt();
         else if (key == "Normalize")
             normalize = rhs[i+1].toBool();
         else if (key == "KType")

@@ -49,7 +49,7 @@ MATLABDIR ?= /usr
 MEX       ?= $(MATLABDIR)/bin/mkoctfile --mex
 MATLAB    ?= $(MATLABDIR)/bin/octave-cli --no-gui --no-window-system --no-init-file --quiet
 else
-MATLABDIR ?= /usr/local/matlab
+MATLABDIR ?= /Applications/MATLAB_R2020a.app
 MEX       ?= $(MATLABDIR)/bin/mex
 MATLAB    ?= $(MATLABDIR)/bin/matlab -nodesktop -nodisplay -noFigureWindows -nosplash
 endif
@@ -67,7 +67,7 @@ ifeq ($(MEXEXT),)
 endif
 
 # options
-PKG_CONFIG_OPENCV ?= opencv
+PKG_CONFIG_OPENCV ?= opencv4
 ifneq (,$(findstring contrib,$(MAKECMDGOALS)))
 WITH_CONTRIB       = true
 endif

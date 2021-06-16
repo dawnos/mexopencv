@@ -7,6 +7,7 @@
  */
 #include "mexopencv.hpp"
 #include "opencv2/videoio.hpp"
+#include "opencv2/videoio/videoio_c.h"
 using namespace std;
 using namespace cv;
 

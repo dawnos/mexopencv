@@ -18,9 +18,13 @@ namespace {
  */
 bool isa(const FileNode& node, const string& type_name)
 {
+#if 0
     const CvFileNode* pnode = (*node);
     return (pnode && pnode->info && pnode->info->type_name) ?
         (string(pnode->info->type_name) == type_name) : false;
+#else
+    return node.name() == type_name;
+#endif
 }
 
 /** Recursive function to output to a file storage

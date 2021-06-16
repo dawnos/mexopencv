@@ -6,7 +6,8 @@
  * @date 2015
  */
 #include "mexopencv.hpp"
-#include "opencv2/photo.hpp"
+// #include "opencv2/photo.hpp"
+#include "opencv2/xphoto/tonemap.hpp"
 using namespace std;
 using namespace cv;
 
@@ -15,14 +16,14 @@ namespace {
 /// Last object id to allocate
 int last_id = 0;
 /// Object container
-map<int,Ptr<TonemapDurand> > obj_;
+map<int,Ptr<xphoto::TonemapDurand> > obj_;
 
 /** Create an instance of TonemapDurand using options in arguments
  * @param first iterator at the beginning of the vector range
  * @param last iterator at the end of the vector range
  * @return smart pointer to created TonemapDurand
  */
-Ptr<TonemapDurand> create_TonemapDurand(
+Ptr<xphoto::TonemapDurand> create_TonemapDurand(
     vector<MxArray>::const_iterator first,
     vector<MxArray>::const_iterator last)
 {
@@ -50,7 +51,7 @@ Ptr<TonemapDurand> create_TonemapDurand(
             mexErrMsgIdAndTxt("mexopencv:error",
                 "Unrecognized option %s", key.c_str());
     }
-    return createTonemapDurand(gamma, contrast, saturation, sigma_space, sigma_color);
+    return xphoto::createTonemapDurand(gamma, contrast, saturation, sigma_space, sigma_color);
 }
 }
 
@@ -82,7 +83,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
     }
 
     // Big operation switch
-    Ptr<TonemapDurand> obj = obj_[id];
+    Ptr<xphoto::TonemapDurand> obj = obj_[id];
     if (obj.empty())
         mexErrMsgIdAndTxt("mexopencv:error", "Object not found id=%d", id);
     if (method == "delete") {

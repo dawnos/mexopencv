@@ -87,7 +87,7 @@ Ptr<ORB> createORB(
     int edgeThreshold = 31;
     int firstLevel = 0;
     int WTA_K = 2;
-    int scoreType = ORB::HARRIS_SCORE;
+    cv::ORB::ScoreType scoreType = ORB::HARRIS_SCORE;
     int patchSize = 31;
     int fastThreshold = 20;
     for (; first != last; first += 2) {
@@ -170,7 +170,7 @@ Ptr<FastFeatureDetector> createFastFeatureDetector(
     nargchk((std::distance(first, last) % 2) == 0);
     int threshold = 10;
     bool nonmaxSuppression = true;
-    int type = FastFeatureDetector::TYPE_9_16;
+    FastFeatureDetector::DetectorType type = FastFeatureDetector::TYPE_9_16;
     for (; first != last; first += 2) {
         string key((*first).toString());
         const MxArray& val = *(first + 1);
@@ -288,7 +288,7 @@ Ptr<KAZE> createKAZE(
     float threshold = 0.001f;
     int nOctaves = 4;
     int nOctaveLayers = 4;
-    int diffusivity = KAZE::DIFF_PM_G2;
+    KAZE::DiffusivityType diffusivity = KAZE::DIFF_PM_G2;
     for (; first != last; first += 2) {
         string key((*first).toString());
         const MxArray& val = *(first + 1);
@@ -317,13 +317,13 @@ Ptr<AKAZE> createAKAZE(
     vector<MxArray>::const_iterator last)
 {
     nargchk((std::distance(first, last) % 2) == 0);
-    int descriptor_type = AKAZE::DESCRIPTOR_MLDB;
+    AKAZE::DescriptorType descriptor_type = AKAZE::DESCRIPTOR_MLDB;
     int descriptor_size = 0;
     int descriptor_channels = 3;
     float threshold = 0.001f;
     int nOctaves = 4;
     int nOctaveLayers = 4;
-    int diffusivity = KAZE::DIFF_PM_G2;
+    KAZE::DiffusivityType diffusivity = KAZE::DIFF_PM_G2;
     for (; first != last; first += 2) {
         string key((*first).toString());
         const MxArray& val = *(first + 1);
@@ -356,7 +356,7 @@ Ptr<AgastFeatureDetector> createAgastFeatureDetector(
     nargchk((std::distance(first, last) % 2) == 0);
     int threshold = 10;
     bool nonmaxSuppression = true;
-    int type = AgastFeatureDetector::OAST_9_16;
+    AgastFeatureDetector::DetectorType type = AgastFeatureDetector::OAST_9_16;
     for (; first != last; first += 2) {
         string key((*first).toString());
         const MxArray& val = *(first + 1);
@@ -373,7 +373,6 @@ Ptr<AgastFeatureDetector> createAgastFeatureDetector(
     return AgastFeatureDetector::create(threshold, nonmaxSuppression, type);
 }
 
-#ifdef HAVE_OPENCV_XFEATURES2D
 Ptr<SIFT> createSIFT(
     vector<MxArray>::const_iterator first,
     vector<MxArray>::const_iterator last)
@@ -405,6 +404,7 @@ Ptr<SIFT> createSIFT(
         edgeThreshold, sigma);
 }
 
+#ifdef HAVE_OPENCV_XFEATURES2D
 Ptr<SURF> createSURF(
     vector<MxArray>::const_iterator first,
     vector<MxArray>::const_iterator last)
@@ -576,7 +576,7 @@ Ptr<DAISY> createDAISY(
     int q_radius = 3;
     int q_theta = 8;
     int q_hist = 8;
-    int norm = DAISY::NRM_NONE;
+    DAISY::NormalizationType norm = DAISY::NRM_NONE;
     Mat H;
     bool interpolation = true;
     bool use_orientation = false;

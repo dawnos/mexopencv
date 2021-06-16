@@ -387,7 +387,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
     }
 
     // Big operation switch
-    Ptr<Net> obj = obj_[id];
+    Ptr<dnn::Net> obj = obj_[id];
     if (obj.empty())
         mexErrMsgIdAndTxt("mexopencv:error", "Object not found id=%d", id);
     if (method == "delete") {
@@ -435,10 +435,12 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
         vector<Ptr<Layer> > layers = obj->getLayerInputs(MxArrayToLayerId(rhs[2]));
         plhs[0] = toStruct(layers);
     }
+    /*
     else if (method == "deleteLayer") {
         nargchk(nrhs==3 && nlhs==0);
         obj->deleteLayer(MxArrayToLayerId(rhs[2]));
     }
+    */
     else if (method == "connect") {
         nargchk((nrhs==4 || nrhs==6) && nlhs==0);
         if (nrhs == 4) {

@@ -28,7 +28,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
     // Option processing
     Mat outImg;
     Scalar color(Scalar::all(-1));
-    int flags = DrawMatchesFlags::DEFAULT;
+    cv::DrawMatchesFlags flags = DrawMatchesFlags::DEFAULT;
     for (int i=2; i<nrhs; i+=2) {
         string key(rhs[i].toString());
         if (key == "Color")

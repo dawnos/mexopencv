@@ -12,7 +12,7 @@ using namespace cv;
 
 namespace {
 /// AGAST neighborhood types
-const ConstMap<std::string, int> AgastTypeMap = ConstMap<std::string, int>
+const ConstMap<std::string, AgastFeatureDetector::DetectorType> AgastTypeMap = ConstMap<std::string, AgastFeatureDetector::DetectorType>
     ("AGAST_5_8",   cv::AgastFeatureDetector::AGAST_5_8)
     ("AGAST_7_12d", cv::AgastFeatureDetector::AGAST_7_12d)
     ("AGAST_7_12s", cv::AgastFeatureDetector::AGAST_7_12s)
@@ -37,7 +37,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
     // Option processing
     int threshold = 10;
     bool nonmaxSupression = true;
-    int type = cv::AgastFeatureDetector::OAST_9_16;
+    cv::AgastFeatureDetector::DetectorType type = cv::AgastFeatureDetector::OAST_9_16;
     for (int i=1; i<nrhs; i+=2) {
         string key(rhs[i].toString());
         if (key == "Threshold")

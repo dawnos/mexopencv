@@ -30,7 +30,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
     Scalar matchColor(Scalar::all(-1));
     Scalar singlePointColor(Scalar::all(-1));
     vector<char> matchesMask;
-    int flags = DrawMatchesFlags::DEFAULT;
+    cv::DrawMatchesFlags flags = DrawMatchesFlags::DEFAULT;
     for (int i=5; i<nrhs; i+=2) {
         string key(rhs[i].toString());
         if (key == "MatchColor")

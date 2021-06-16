@@ -5,6 +5,7 @@
 *.asv
 *.bak
 octave-workspace
+.vscode
 
 # compiled outputs and binaries
 *.mex*

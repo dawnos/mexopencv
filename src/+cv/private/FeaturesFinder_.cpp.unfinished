@@ -18,7 +18,7 @@ namespace {
 /// Last object id to allocate
 int last_id = 0;
 /// Object container
-map<int,Ptr<FeaturesFinder> > obj_;
+map<int,Ptr<Feature2D> > obj_;
 }
 
 /**
@@ -49,7 +49,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
     }
 
     // Big operation switch
-    Ptr<FeaturesFinder> obj = obj_[id];
+    Ptr<Feature2D> obj = obj_[id];
     if (obj.empty())
         mexErrMsgIdAndTxt("mexopencv:error", "Object not found id=%d", id);
     if (method == "delete") {
@@ -61,10 +61,12 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
         nargchk(nrhs==2 && nlhs<=1);
         plhs[0] = MxArray(string(typeid(*obj).name()));
     }
+    /*
     else if (method == "collectGarbage") {
         nargchk(nrhs==2 && nlhs==0);
         obj->collectGarbage();
     }
+    */
     /*
     else if (method == "isThreadSafe") {
         nargchk(nrhs==2 && nlhs<=1);
@@ -75,13 +77,16 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
     else if (method == "find") {
         nargchk((nrhs==3 || nrhs==4) && nlhs<=1);
         Mat image(rhs[2].toMat());
-        ImageFeatures features;
+        // ImageFeatures features;
+        std::vector<KeyPoint> features;
         if (nrhs == 4) {
             vector<Rect> rois(rhs[3].toVector<Rect>());
-            obj->operator()(image, features, rois);
+            // obj->operator()(image, features, rois);
+            obj->detect(image, features, rois);
         }
         else
-            obj->operator()(image, features);
+            // obj->operator()(image, features);
+            obj->detect(image, features);
         plhs[0] = toStruct(features);
     }
     else if (method == "findParallel") {
@@ -93,10 +98,12 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
             vector<vector<Rect> > rois(rhs[3].toVector(
                 const_mem_fun_ref_t<vector<Rect>, MxArray>(
                     &MxArray::toVector<Rect>)));
-            obj->operator()(images, features, rois);
+            // obj->operator()(images, features, rois);
+            obj->detect(images, features, rois);
         }
         else
-            obj->operator()(images, features);
+            // obj->operator()(images, features);
+            obj->detect(images, features);
         plhs[0] = toStruct(features);
     }
     else

@@ -487,8 +487,10 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
             plhs[0] = MxArray(obj->getIterations());
         else if (prop == "KernelSize")
             plhs[0] = MxArray(obj->getKernelSize());
+        /*
         else if (prop == "Labmda")
             plhs[0] = MxArray(obj->getLabmda());
+        */
         else if (prop == "Scale")
             plhs[0] = MxArray(obj->getScale());
         else if (prop == "Tau")
@@ -513,7 +515,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
         else if (prop == "KernelSize")
             obj->setKernelSize(rhs[3].toInt());
         else if (prop == "Labmda")
-            obj->setLabmda(rhs[3].toDouble());
+            obj->setLambda(rhs[3].toDouble());
         else if (prop == "Scale")
             obj->setScale(rhs[3].toInt());
         else if (prop == "Tau")

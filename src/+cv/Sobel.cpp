@@ -10,11 +10,11 @@
 using namespace std;
 using namespace cv;
 
-namespace {
+// namespace {
 /// KSize map for option processing
-const ConstMap<string,int> KSizeMap = ConstMap<string,int>
-    ("Scharr", CV_SCHARR);
-}
+// const ConstMap<string,int> KSizeMap = ConstMap<string,int>
+//     ("Scharr", CV_SCHARR);
+// }
 
 /**
  * Main entry called from Matlab
@@ -49,8 +49,9 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
         else if (key == "YOrder")
             dy = rhs[i+1].toInt();
         else if (key == "KSize")
-            ksize = (rhs[i+1].isChar()) ?
-                KSizeMap[rhs[i+1].toString()] : rhs[i+1].toInt();
+            // ksize = (rhs[i+1].isChar()) ?
+                // KSizeMap[rhs[i+1].toString()] : rhs[i+1].toInt();
+            ksize = rhs[i+1].toInt();
         else if (key == "Scale")
             scale = rhs[i+1].toDouble();
         else if (key == "Delta")

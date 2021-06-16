@@ -1,12 +1,13 @@
 /**
- * @file DualTVL1OpticalFlow_.cpp
- * @brief mex interface for cv::DualTVL1OpticalFlow
+ * @file optflow::DualTVL1OpticalFlow_.cpp
+ * @brief mex interface for cv::optflow::DualTVL1OpticalFlow
  * @ingroup video
  * @author Amro
  * @date 2015
  */
 #include "mexopencv.hpp"
 #include "opencv2/video.hpp"
+#include "opencv2/optflow.hpp"
 using namespace std;
 using namespace cv;
 
@@ -15,7 +16,7 @@ namespace {
 /// Last object id to allocate
 int last_id = 0;
 /// Object container
-map<int,Ptr<DualTVL1OpticalFlow> > obj_;
+map<int,Ptr<optflow::DualTVL1OpticalFlow> > obj_;
 }
 
 /**
@@ -38,14 +39,14 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
     // constructor call
     if (method == "new") {
         nargchk(nrhs==2 && nlhs<=1);
-        obj_[++last_id] = DualTVL1OpticalFlow::create();
+        obj_[++last_id] = optflow::DualTVL1OpticalFlow::create();
         plhs[0] = MxArray(last_id);
         mexLock();
         return;
     }
 
     // Big operation switch
-    Ptr<DualTVL1OpticalFlow> obj = obj_[id];
+    Ptr<optflow::DualTVL1OpticalFlow> obj = obj_[id];
     if (obj.empty())
         mexErrMsgIdAndTxt("mexopencv:error", "Object not found id=%d", id);
     if (method == "delete") {

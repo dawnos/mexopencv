@@ -26,43 +26,43 @@
 // ==================== Feature Detection and Description ====================
 
 /// ORB score types
-const ConstMap<std::string, int> ORBScoreType = ConstMap<std::string, int>
+const ConstMap<std::string, cv::ORB::ScoreType> ORBScoreType = ConstMap<std::string, cv::ORB::ScoreType>
     ("Harris", cv::ORB::HARRIS_SCORE)
     ("FAST",   cv::ORB::FAST_SCORE);
 
 /// inverse ORB score types
-const ConstMap<int, std::string> ORBScoreTypeInv = ConstMap<int, std::string>
+const ConstMap<cv::ORB::ScoreType, std::string> ORBScoreTypeInv = ConstMap<cv::ORB::ScoreType, std::string>
     (cv::ORB::HARRIS_SCORE, "Harris")
     (cv::ORB::FAST_SCORE,   "FAST");
 
 /// FAST types
-const ConstMap<std::string, int> FASTTypeMap = ConstMap<std::string, int>
+const ConstMap<std::string, cv::FastFeatureDetector::DetectorType> FASTTypeMap = ConstMap<std::string, cv::FastFeatureDetector::DetectorType>
     ("TYPE_5_8",  cv::FastFeatureDetector::TYPE_5_8)
     ("TYPE_7_12", cv::FastFeatureDetector::TYPE_7_12)
     ("TYPE_9_16", cv::FastFeatureDetector::TYPE_9_16);
 
 /// inverse FAST types
-const ConstMap<int, std::string> FASTTypeMapInv = ConstMap<int, std::string>
+const ConstMap<cv::FastFeatureDetector::DetectorType, std::string> FASTTypeMapInv = ConstMap<cv::FastFeatureDetector::DetectorType, std::string>
     (cv::FastFeatureDetector::TYPE_5_8,  "TYPE_5_8")
     (cv::FastFeatureDetector::TYPE_7_12, "TYPE_7_12")
     (cv::FastFeatureDetector::TYPE_9_16, "TYPE_9_16");
 
 /// KAZE Diffusivity type
-const ConstMap<std::string, int> KAZEDiffusivityType = ConstMap<std::string, int>
+const ConstMap<std::string, cv::KAZE::DiffusivityType> KAZEDiffusivityType = ConstMap<std::string, cv::KAZE::DiffusivityType>
     ("PM_G1",       cv::KAZE::DIFF_PM_G1)
     ("PM_G2",       cv::KAZE::DIFF_PM_G2)
     ("WEICKERT",    cv::KAZE::DIFF_WEICKERT)
     ("CHARBONNIER", cv::KAZE::DIFF_CHARBONNIER);
 
 /// inverse KAZE Diffusivity type
-const ConstMap<int, std::string> KAZEDiffusivityTypeInv = ConstMap<int, std::string>
+const ConstMap<cv::KAZE::DiffusivityType, std::string> KAZEDiffusivityTypeInv = ConstMap<cv::KAZE::DiffusivityType, std::string>
     (cv::KAZE::DIFF_PM_G1,       "PM_G1")
     (cv::KAZE::DIFF_PM_G2,       "PM_G2")
     (cv::KAZE::DIFF_WEICKERT,    "WEICKERT")
     (cv::KAZE::DIFF_CHARBONNIER, "CHARBONNIER");
 
 /// AKAZE descriptor type
-const ConstMap<std::string, int> AKAZEDescriptorType = ConstMap<std::string, int>
+const ConstMap<std::string, cv::AKAZE::DescriptorType> AKAZEDescriptorType = ConstMap<std::string, cv::AKAZE::DescriptorType>
     ("KAZEUpright", cv::AKAZE::DESCRIPTOR_KAZE_UPRIGHT)
     ("KAZE",        cv::AKAZE::DESCRIPTOR_KAZE)
     ("MLDBUpright", cv::AKAZE::DESCRIPTOR_MLDB_UPRIGHT)
@@ -76,7 +76,7 @@ const ConstMap<int, std::string> AKAZEDescriptorTypeInv = ConstMap<int, std::str
     (cv::AKAZE::DESCRIPTOR_MLDB,         "MLDB");
 
 /// AGAST neighborhood types
-const ConstMap<std::string, int> AgastTypeMap = ConstMap<std::string, int>
+const ConstMap<std::string, cv::AgastFeatureDetector::DetectorType> AgastTypeMap = ConstMap<std::string, cv::AgastFeatureDetector::DetectorType>
     ("AGAST_5_8",   cv::AgastFeatureDetector::AGAST_5_8)
     ("AGAST_7_12d", cv::AgastFeatureDetector::AGAST_7_12d)
     ("AGAST_7_12s", cv::AgastFeatureDetector::AGAST_7_12s)
@@ -91,7 +91,7 @@ const ConstMap<int, std::string> AgastTypeInvMap = ConstMap<int, std::string>
 
 #ifdef HAVE_OPENCV_XFEATURES2D
 /// DAISY normalization types
-const ConstMap<std::string, int> DAISYNormType = ConstMap<std::string, int>
+const ConstMap<std::string, cv::xfeatures2d::DAISY::NormalizationType> DAISYNormType = ConstMap<std::string, cv::xfeatures2d::DAISY::NormalizationType>
     ("None",    cv::xfeatures2d::DAISY::NRM_NONE)
     ("Partial", cv::xfeatures2d::DAISY::NRM_PARTIAL)
     ("Full",    cv::xfeatures2d::DAISY::NRM_FULL)
@@ -220,16 +220,16 @@ cv::Ptr<cv::AgastFeatureDetector> createAgastFeatureDetector(
     std::vector<MxArray>::const_iterator first,
     std::vector<MxArray>::const_iterator last);
 
-#ifdef HAVE_OPENCV_XFEATURES2D
 /** Create an instance of SIFT using options in arguments
  * @param first iterator at the beginning of the vector range
  * @param last iterator at the end of the vector range
  * @return smart pointer to an instance cv::xfeatures2d::SIFT
  */
-cv::Ptr<cv::xfeatures2d::SIFT> createSIFT(
+cv::Ptr<cv::SIFT> createSIFT(
     std::vector<MxArray>::const_iterator first,
     std::vector<MxArray>::const_iterator last);
 
+#ifdef HAVE_OPENCV_XFEATURES2D
 /** Create an instance of SURF using options in arguments
  * @param first iterator at the beginning of the vector range
  * @param last iterator at the end of the vector range

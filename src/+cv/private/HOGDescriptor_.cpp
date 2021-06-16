@@ -17,10 +17,10 @@ int last_id = 0;
 map<int,Ptr<HOGDescriptor> > obj_;
 
 /// HistogramNormType map
-const ConstMap<string,int> HistogramNormType = ConstMap<string,int>
+const ConstMap<string,HOGDescriptor::HistogramNormType> HistogramNormType = ConstMap<string,HOGDescriptor::HistogramNormType>
     ("L2Hys", HOGDescriptor::L2Hys);
 /// HistogramNormType inverse map
-const ConstMap<int,string> InvHistogramNormType = ConstMap<int,string>
+const ConstMap<HOGDescriptor::HistogramNormType,string> InvHistogramNormType = ConstMap<HOGDescriptor::HistogramNormType,string>
     (HOGDescriptor::L2Hys, "L2Hys");
 
 /** Convert MxArray to cv::DetectionROI
@@ -105,7 +105,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
         int nbins = 9;
         int derivAperture = 1;
         double winSigma = -1;
-        int histogramNormType = cv::HOGDescriptor::L2Hys;
+        cv::HOGDescriptor::HistogramNormType histogramNormType = cv::HOGDescriptor::L2Hys;
         double L2HysThreshold = 0.2;
         bool gammaCorrection = false;  //TODO: true
         int nlevels = cv::HOGDescriptor::DEFAULT_NLEVELS;
@@ -173,11 +173,13 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
         double ws = obj->getWinSigma();
         plhs[0] = MxArray(ws);
     }
+    /*
     else if (method == "readALTModel") {
         nargchk(nrhs==3 && nlhs==0);
         string modelfile(rhs[2].toString());
         obj->readALTModel(modelfile);
     }
+    */
     else if (method == "load") {
         nargchk(nrhs>=3 && (nrhs%2)==1 && nlhs<=1);
         string objname;

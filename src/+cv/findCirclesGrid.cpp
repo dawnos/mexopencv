@@ -161,7 +161,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
     Mat image(rhs[0].toMat(CV_8U));
     Size patternSize(rhs[1].toSize());
     vector<Point2f> centers;
-    bool patternFound = findCirclesGrid2(image, patternSize, centers, flags,
+    bool patternFound = findCirclesGrid(image, patternSize, centers, flags,
         blobDetector, params);
     plhs[0] = MxArray(centers);
     if (nlhs > 1)

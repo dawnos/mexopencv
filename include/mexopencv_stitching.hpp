@@ -156,7 +156,7 @@ MxArray toStruct(const std::vector<cv::detail::CameraParams> &cameras);
  * @param p smart poitner to an instance of FeaturesFinder
  * @return output MxArray structure
  */
-MxArray toStruct(cv::Ptr<cv::detail::FeaturesFinder> p);
+MxArray toStruct(cv::Ptr<cv::Feature2D> p);
 
 /** Convert a FeaturesMatcher to MxArray
  * @param p smart poitner to an instance of FeaturesMatcher
@@ -208,7 +208,7 @@ MxArray toStruct(cv::Ptr<cv::detail::Blender> p);
  * @param last iterator at the end of the vector range
  * @return smart pointer to created OrbFeaturesFinder
  */
-cv::Ptr<cv::detail::OrbFeaturesFinder> createOrbFeaturesFinder(
+cv::Ptr<cv::Feature2D> createOrbFeaturesFinder(
     std::vector<MxArray>::const_iterator first,
     std::vector<MxArray>::const_iterator last);
 
@@ -217,7 +217,7 @@ cv::Ptr<cv::detail::OrbFeaturesFinder> createOrbFeaturesFinder(
  * @param last iterator at the end of the vector range
  * @return smart pointer to created AKAZEFeaturesFinder
  */
-cv::Ptr<cv::detail::AKAZEFeaturesFinder> createAKAZEFeaturesFinder(
+cv::Ptr<cv::Feature2D> createAKAZEFeaturesFinder(
     std::vector<MxArray>::const_iterator first,
     std::vector<MxArray>::const_iterator last);
 
@@ -227,7 +227,7 @@ cv::Ptr<cv::detail::AKAZEFeaturesFinder> createAKAZEFeaturesFinder(
  * @param last iterator at the end of the vector range
  * @return smart pointer to created SurfFeaturesFinder
  */
-cv::Ptr<cv::detail::SurfFeaturesFinder> createSurfFeaturesFinder(
+cv::Ptr<cv::Feature2D> createSurfFeaturesFinder(
     std::vector<MxArray>::const_iterator first,
     std::vector<MxArray>::const_iterator last);
 #endif
@@ -242,7 +242,7 @@ cv::Ptr<cv::detail::SurfFeaturesFinder> createSurfFeaturesFinder(
  * @param last iterator at the end of the vector range
  * @return smart pointer to created FeaturesFinder
  */
-cv::Ptr<cv::detail::FeaturesFinder> createFeaturesFinder(
+cv::Ptr<cv::Feature2D> createFeaturesFinder(
     const std::string& type,
     std::vector<MxArray>::const_iterator first,
     std::vector<MxArray>::const_iterator last);

@@ -16,14 +16,14 @@ using namespace cv::detail;
 // ==================== XXX ====================
 
 /// KAZE Diffusivity type
-const ConstMap<string, int> KAZEDiffusivityType = ConstMap<string, int>
+const ConstMap<string, cv::KAZE::DiffusivityType> KAZEDiffusivityType = ConstMap<string, cv::KAZE::DiffusivityType>
     ("PM_G1",       cv::KAZE::DIFF_PM_G1)
     ("PM_G2",       cv::KAZE::DIFF_PM_G2)
     ("WEICKERT",    cv::KAZE::DIFF_WEICKERT)
     ("CHARBONNIER", cv::KAZE::DIFF_CHARBONNIER);
 
 /// AKAZE descriptor type
-const ConstMap<string, int> AKAZEDescriptorType = ConstMap<string, int>
+const ConstMap<string, cv::AKAZE::DescriptorType> AKAZEDescriptorType = ConstMap<string, cv::AKAZE::DescriptorType>
     ("KAZEUpright", cv::AKAZE::DESCRIPTOR_KAZE_UPRIGHT)
     ("KAZE",        cv::AKAZE::DESCRIPTOR_KAZE)
     ("MLDBUpright", cv::AKAZE::DESCRIPTOR_MLDB_UPRIGHT)
@@ -209,7 +209,7 @@ MxArray toStruct(const vector<CameraParams> &cameras)
 
 // ==================== XXX ====================
 
-MxArray toStruct(Ptr<FeaturesFinder> p)
+MxArray toStruct(Ptr<Feature2D> p)
 {
     MxArray s(MxArray::Struct());
     if (!p.empty()) {
@@ -304,7 +304,7 @@ MxArray toStruct(Ptr<Blender> p)
 
 // ==================== XXX ====================
 
-Ptr<OrbFeaturesFinder> createOrbFeaturesFinder(
+Ptr<Feature2D> createOrbFeaturesFinder(
     vector<MxArray>::const_iterator first,
     vector<MxArray>::const_iterator last)
 {
@@ -405,12 +405,12 @@ Ptr<SurfFeaturesFinder> createSurfFeaturesFinder(
 }
 #endif
 
-Ptr<FeaturesFinder> createFeaturesFinder(
+Ptr<Feature2D> createFeaturesFinder(
     const string& type,
     vector<MxArray>::const_iterator first,
     vector<MxArray>::const_iterator last)
 {
-    Ptr<FeaturesFinder> p;
+    Ptr<Feature2D> p;
     if (type == "OrbFeaturesFinder")
         p = createOrbFeaturesFinder(first, last);
     else if (type == "AKAZEFeaturesFinder")

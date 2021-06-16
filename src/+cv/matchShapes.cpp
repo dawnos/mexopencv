@@ -12,10 +12,10 @@ using namespace cv;
 
 namespace {
 /// Shape matching methods for option processing
-const ConstMap<string,int> ShapeMatchMethodsMap = ConstMap<string,int>
-    ("I1", CV_CONTOURS_MATCH_I1)
-    ("I2", CV_CONTOURS_MATCH_I2)
-    ("I3", CV_CONTOURS_MATCH_I3);
+const ConstMap<string,cv::ShapeMatchModes> ShapeMatchMethodsMap = ConstMap<string,cv::ShapeMatchModes>
+    ("I1", CONTOURS_MATCH_I1)
+    ("I2", CONTOURS_MATCH_I2)
+    ("I3", CONTOURS_MATCH_I3);
 }
 
 /**
@@ -34,7 +34,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
     vector<MxArray> rhs(prhs, prhs+nrhs);
 
     // Option processing
-    int method = CV_CONTOURS_MATCH_I1;
+    cv::ShapeMatchModes method = CONTOURS_MATCH_I1;
     double parameter = 0;
     for (int i=2; i<nrhs; i+=2) {
         string key(rhs[i].toString());

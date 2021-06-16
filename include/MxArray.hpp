@@ -383,7 +383,7 @@ class MxArray
      * cv::Mat x(MxArray(prhs[0]).toMat());
      * @endcode
      */
-    cv::Mat toMat(int depth = CV_USRTYPE1, bool transpose = true) const;
+    cv::Mat toMat(int depth = -1 /* CV_USRTYPE1 */, bool transpose = true) const;
     /** Convert MxArray to a single-channel cv::Mat.
      * @param depth depth of cv::Mat. e.g., \c CV_8U, \c CV_32F. When
      *    \c CV_USERTYPE1 is specified, depth will be automatically determined
@@ -410,7 +410,7 @@ class MxArray
      * cv::Mat x(MxArray(prhs[0]).toMatND());
      * @endcode
      */
-    cv::MatND toMatND(int depth = CV_USRTYPE1, bool transpose = true) const;
+    cv::MatND toMatND(int depth = -1 /* CV_USRTYPE1 */, bool transpose = true) const;
     /** Convert double sparse MxArray to 2D single-channel cv::SparseMat.
      * @param depth depth of cv::SparseMat. e.g., \c CV_32F, \c CV_64F. When
      *    \c CV_USERTYPE1 is specified, depth will be automatically determined
@@ -418,7 +418,7 @@ class MxArray
      *    supported type for MATLAB sparse arrays). default: \c CV_USERTYPE1.
      * @return cv::SparseMat object.
      */
-    cv::SparseMat toSparseMat(int depth = CV_USRTYPE1) const;
+    cv::SparseMat toSparseMat(int depth = -1 /* CV_USRTYPE1 */) const;
     /** Convert MxArray to cv::Moments.
      * @param index linear index of the struct array element.
      * @return cv::Moments object.

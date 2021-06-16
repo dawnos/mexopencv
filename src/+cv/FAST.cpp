@@ -12,7 +12,7 @@ using namespace cv;
 
 namespace {
 /// FAST neighborhood types
-const ConstMap<string, int> FASTTypeMap = ConstMap<string, int>
+const ConstMap<string, cv::FastFeatureDetector::DetectorType> FASTTypeMap = ConstMap<string, cv::FastFeatureDetector::DetectorType>
     ("TYPE_5_8",  cv::FastFeatureDetector::TYPE_5_8)
     ("TYPE_7_12", cv::FastFeatureDetector::TYPE_7_12)
     ("TYPE_9_16", cv::FastFeatureDetector::TYPE_9_16);
@@ -36,7 +36,7 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[])
     // Option processing
     int threshold = 10;
     bool nonmaxSupression = true;
-    int type = cv::FastFeatureDetector::TYPE_9_16;
+    cv::FastFeatureDetector::DetectorType type = cv::FastFeatureDetector::TYPE_9_16;
     for (int i=1; i<nrhs; i+=2) {
         string key(rhs[i].toString());
         if (key == "Threshold")
